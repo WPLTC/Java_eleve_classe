@@ -43,4 +43,27 @@ public class Main {
             eleves[i] = new Eleve(nom, adresse, dateNaissance, notes);
         }
     }
+
+    public void afficherParMerite() {
+        //  moyenne décroissante de nos eleves
+        for (int i = 1; i < effectif; i++) {
+            Eleve key = eleves[i];
+            int j = i - 1;
+            while (j >= 0 && eleves[j].getMoyenne() < key.getMoyenne()) {
+                eleves[j + 1] = eleves[j];
+                j--;
+            }
+            eleves[j + 1] = key;
+        }
+
+        System.out.println("\nEleves par ordre de merite:");
+        for (Eleve e : eleves) {
+            e.afficher();
+        }
+    }
+
+    public static void main(String[] args) {
+        Main main = new Main();
+        main.afficherParMerite();
+    }
 }
